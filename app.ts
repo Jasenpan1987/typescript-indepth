@@ -99,6 +99,9 @@ const magShelf: Shelf<Magazine> = new Shelf<Magazine>(); // bookshelf with Magaz
 mag.forEach(m => magShelf.add(m));
 console.log(magShelf.getFirst().title);
 
+magShelf.printTitles();
+const firstMagazineOnShelf: Magazine = magShelf.getFirst();
+console.log(firstMagazineOnShelf.title);
 
 // generic function
 // const inventory: Array<Book> = [

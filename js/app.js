@@ -81,6 +81,9 @@ console.log(bookShelf.getFirst().title);
 var magShelf = new shelf_1.default(); // bookshelf with Magazine
 mag.forEach(function (m) { return magShelf.add(m); });
 console.log(magShelf.getFirst().title);
+magShelf.printTitles();
+var firstMagazineOnShelf = magShelf.getFirst();
+console.log(firstMagazineOnShelf.title);
 // generic function
 // const inventory: Array<Book> = [
 //     { id: 1, title:"Node JS Guide", author: "justjavac", available: true, category: Category.Biography },

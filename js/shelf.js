@@ -10,6 +10,12 @@ var Shelf = (function () {
     Shelf.prototype.getFirst = function () {
         return this._items[0];
     };
+    Shelf.prototype.find = function (title) {
+        return this._items.find(function (i) { return i.title === title; });
+    };
+    Shelf.prototype.printTitles = function () {
+        this._items.forEach(function (i) { return console.log(i.title); });
+    };
     return Shelf;
 }());
 exports.default = Shelf;
