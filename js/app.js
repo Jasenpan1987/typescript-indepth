@@ -2,6 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var enums_1 = require("./enums");
 var shelf_1 = require("./shelf");
+var _ = require("lodash");
+var snakeCaseTitle = _.snakeCase("Something Good To Have");
+console.log(snakeCaseTitle);
 function getAllBooks() {
     var books = [
         { id: 1, title: "Node JS Guide", author: "justjavac", available: true, category: enums_1.Category.Biography },

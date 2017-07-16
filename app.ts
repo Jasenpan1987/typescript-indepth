@@ -4,6 +4,10 @@ import { UniLibrarian, ReferenceItem } from './classes';
 import Encyclopedia from './encyclopedia';
 import { calculateLateFee as calLateFee, maxBooksAllowed, purge } from './lib/Utils';
 import Shelf from './shelf';
+import * as _ from 'lodash';
+
+const snakeCaseTitle = _.snakeCase("Something Good To Have");
+console.log(snakeCaseTitle);
 
 function getAllBooks(): Book[] {
     let books = [
