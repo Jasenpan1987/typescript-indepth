@@ -10,7 +10,7 @@ class UniLibrarian implements Librarian {
     }
 }
 
-class ReferenceItem {
+abstract class ReferenceItem {
     private _publisher: string;
     static department: string = "Research"; // static property, only accessable from the class
 
@@ -30,6 +30,12 @@ class ReferenceItem {
         console.log(`${this.title} was published in ${this.year}`);
         console.log(`${this.title} belongs to department of ${ReferenceItem.department}`);
     }
+
+    printPublisher?():void { // optional method
+        console.log(this.publisher);
+    }
+
+    abstract printCitation(): void // abstract method
 }
 
 class Encyclopedia extends ReferenceItem {
@@ -41,6 +47,10 @@ class Encyclopedia extends ReferenceItem {
     printItem () {
         super.printItem(); // call parent's printItem
         console.log(`${this.title} is on ${this.edition} edition`); // child logic
+    }
+
+    printCitation() {
+        console.log(`Cite from ${this.title}`);
     }
 }
 

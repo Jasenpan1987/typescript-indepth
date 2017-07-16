@@ -75,11 +75,23 @@ function getBookTitles (filterProperty: string | boolean): string[] {
 
 
 /******************************************************************************************/
+// class literal
+const Newspaper = class extends ReferenceItem {
+    printCitation() {
+        console.log(`Citation from a newspaper ${this.title}`);
+    }
+}
 
-const encyclopediaBook = new Encyclopedia("World Encyc", 1999, 3);
-encyclopediaBook.printItem();
+let australian = new Newspaper("The Australian", 2017);
+australian.printItem();
+australian.printCitation();
 
-// const ref: ReferenceItem = new ReferenceItem("Foo Item", 1986);
+// abstract class
+// const encyclopediaBook = new Encyclopedia("World Encyc", 1999, 3);
+// encyclopediaBook.printItem();
+// encyclopediaBook.printCitation();
+
+// const ref: ReferenceItem = new ReferenceItem("Foo Item", 1986); // error, can't instantiate abstract class
 // ref.printItem();
 
 // ref.publisher = "Random Publisher";

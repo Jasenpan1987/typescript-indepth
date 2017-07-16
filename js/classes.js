@@ -39,6 +39,9 @@ var ReferenceItem = (function () {
         console.log(this.title + " was published in " + this.year);
         console.log(this.title + " belongs to department of " + ReferenceItem.department);
     };
+    ReferenceItem.prototype.printPublisher = function () {
+        console.log(this.publisher);
+    };
     ReferenceItem.department = "Research"; // static property, only accessable from the class
     return ReferenceItem;
 }());
@@ -53,6 +56,9 @@ var Encyclopedia = (function (_super) {
     Encyclopedia.prototype.printItem = function () {
         _super.prototype.printItem.call(this); // call parent's printItem
         console.log(this.title + " is on " + this.edition + " edition"); // child logic
+    };
+    Encyclopedia.prototype.printCitation = function () {
+        console.log("Cite from " + this.title);
     };
     return Encyclopedia;
 }(ReferenceItem));

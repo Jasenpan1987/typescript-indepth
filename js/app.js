@@ -1,4 +1,14 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var enums_1 = require("./enums");
 var classes_1 = require("./classes");
@@ -65,9 +75,25 @@ function getBookTitles(filterProperty) {
     }
 }
 /******************************************************************************************/
-var encyclopediaBook = new classes_1.Encyclopedia("World Encyc", 1999, 3);
-encyclopediaBook.printItem();
-// const ref: ReferenceItem = new ReferenceItem("Foo Item", 1986);
+// class literal
+var Newspaper = (function (_super) {
+    __extends(class_1, _super);
+    function class_1() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    class_1.prototype.printCitation = function () {
+        console.log("Citation from a newspaper " + this.title);
+    };
+    return class_1;
+}(classes_1.ReferenceItem));
+var australian = new Newspaper("The Australian", 2017);
+australian.printItem();
+australian.printCitation();
+// abstract class
+// const encyclopediaBook = new Encyclopedia("World Encyc", 1999, 3);
+// encyclopediaBook.printItem();
+// encyclopediaBook.printCitation();
+// const ref: ReferenceItem = new ReferenceItem("Foo Item", 1986); // error, can't instantiate abstract class
 // ref.printItem();
 // ref.publisher = "Random Publisher";
 // console.log(ref.publisher);
