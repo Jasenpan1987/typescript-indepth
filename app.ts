@@ -1,6 +1,6 @@
 import { Category } from './enums';
 import { Book, DamageLogger, Librarian, Author } from './interfaces';
-import { UniLibrarian, ReferenceItem } from './classes';
+import { UniLibrarian, ReferenceItem, Encyclopedia } from './classes';
 
 function getAllBooks(): Book[] {
     let books = [
@@ -76,13 +76,14 @@ function getBookTitles (filterProperty: string | boolean): string[] {
 
 /******************************************************************************************/
 
-const ref: ReferenceItem = new ReferenceItem("Foo Item", 1986);
-ref.printItem();
+const encyclopediaBook = new Encyclopedia("World Encyc", 1999, 3);
+encyclopediaBook.printItem();
 
-ref.publisher = "Random Publisher";
-console.log(ref.publisher);
+// const ref: ReferenceItem = new ReferenceItem("Foo Item", 1986);
+// ref.printItem();
 
-
+// ref.publisher = "Random Publisher";
+// console.log(ref.publisher);
 
 // let faviorateLibrarian: Librarian;
 // faviorateLibrarian = new UniLibrarian();

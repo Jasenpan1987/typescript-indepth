@@ -65,10 +65,12 @@ function getBookTitles(filterProperty) {
     }
 }
 /******************************************************************************************/
-var ref = new classes_1.ReferenceItem("Foo Item", 1986);
-ref.printItem();
-ref.publisher = "Random Publisher";
-console.log(ref.publisher);
+var encyclopediaBook = new classes_1.Encyclopedia("World Encyc", 1999, 3);
+encyclopediaBook.printItem();
+// const ref: ReferenceItem = new ReferenceItem("Foo Item", 1986);
+// ref.printItem();
+// ref.publisher = "Random Publisher";
+// console.log(ref.publisher);
 // let faviorateLibrarian: Librarian;
 // faviorateLibrarian = new UniLibrarian();
 // faviorateLibrarian.name = "Foo";
