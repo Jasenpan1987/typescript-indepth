@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var enums_1 = require("./enums");
+var shelf_1 = require("./shelf");
 function getAllBooks() {
     var books = [
         { id: 1, title: "Node JS Guide", author: "justjavac", available: true, category: enums_1.Category.Biography },
@@ -64,6 +65,22 @@ function getBookTitles(filterProperty) {
     }
 }
 /******************************************************************************************/
+var inventory = [
+    { id: 1, title: "Node JS Guide", author: "justjavac", available: true, category: enums_1.Category.Biography },
+    { id: 2, title: "Introduction to react", author: "facebook", available: true, category: enums_1.Category.Fiction },
+    { id: 3, title: "How to use firebase", author: "google", available: false, category: enums_1.Category.Poetry }
+];
+var mag = [
+    { title: "Coding every month", publisher: "Packt" },
+    { title: "Awesome JS", publisher: "Packt" },
+    { title: "New Node", publisher: "Orally" }
+];
+var bookShelf = new shelf_1.default(); // bookshelf with Book
+inventory.forEach(function (book) { return bookShelf.add(book); });
+console.log(bookShelf.getFirst().title);
+var magShelf = new shelf_1.default(); // bookshelf with Magazine
+mag.forEach(function (m) { return magShelf.add(m); });
+console.log(magShelf.getFirst().title);
 // generic function
 // const inventory: Array<Book> = [
 //     { id: 1, title:"Node JS Guide", author: "justjavac", available: true, category: Category.Biography },

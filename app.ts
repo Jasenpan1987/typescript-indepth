@@ -1,8 +1,9 @@
 import { Category } from './enums';
-import { Book, DamageLogger, Librarian, Author } from './interfaces';
+import { Book, DamageLogger, Librarian, Author, Magazine } from './interfaces';
 import { UniLibrarian, ReferenceItem } from './classes';
 import Encyclopedia from './encyclopedia';
 import { calculateLateFee as calLateFee, maxBooksAllowed, purge } from './lib/Utils';
+import Shelf from './shelf';
 
 function getAllBooks(): Book[] {
     let books = [
@@ -78,6 +79,25 @@ function getBookTitles (filterProperty: string | boolean): string[] {
 
 /******************************************************************************************/
 
+const inventory: Array<Book> = [
+    { id: 1, title:"Node JS Guide", author: "justjavac", available: true, category: Category.Biography },
+    { id: 2, title: "Introduction to react", author: "facebook", available: true, category: Category.Fiction },
+    { id: 3, title: "How to use firebase", author: "google", available: false, category: Category.Poetry }
+];
+
+const mag: Array<Magazine> = [
+    { title: "Coding every month", publisher: "Packt"},
+    { title: "Awesome JS", publisher: "Packt"},
+    { title: "New Node", publisher: "Orally"}
+];
+
+const bookShelf: Shelf<Book> = new Shelf<Book>(); // bookshelf with Book
+inventory.forEach(book => bookShelf.add(book));
+console.log(bookShelf.getFirst().title);
+
+const magShelf: Shelf<Magazine> = new Shelf<Magazine>(); // bookshelf with Magazine
+mag.forEach(m => magShelf.add(m));
+console.log(magShelf.getFirst().title);
 
 
 // generic function
