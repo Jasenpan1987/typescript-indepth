@@ -2,7 +2,7 @@ import { Category } from './enums';
 import { Book, DamageLogger, Librarian, Author } from './interfaces';
 import { UniLibrarian, ReferenceItem } from './classes';
 import Encyclopedia from './encyclopedia';
-import { calculateLateFee as calLateFee, maxBooksAllowed } from './lib/Utils';
+import { calculateLateFee as calLateFee, maxBooksAllowed, purge } from './lib/Utils';
 
 function getAllBooks(): Book[] {
     let books = [
@@ -77,16 +77,33 @@ function getBookTitles (filterProperty: string | boolean): string[] {
 
 
 /******************************************************************************************/
-// class literal
-const Newspaper = class extends ReferenceItem {
-    printCitation() {
-        console.log(`Citation from a newspaper ${this.title}`);
-    }
-}
 
-let australian = new Newspaper("The Australian", 2017);
-australian.printItem();
-australian.printCitation();
+
+
+// generic function
+// const inventory: Array<Book> = [
+//     { id: 1, title:"Node JS Guide", author: "justjavac", available: true, category: Category.Biography },
+//     { id: 2, title: "Introduction to react", author: "facebook", available: true, category: Category.Fiction },
+//     { id: 3, title: "How to use firebase", author: "google", available: false, category: Category.Poetry }
+// ];
+
+// const purgedInventory = purge<Book>(inventory); // gives Book to T during the invokation
+// purgedInventory.forEach((book: Book) => console.log(book.title));
+
+// const numbers = [1, 2, 3, 4, 5];
+// const purgedNumber: Array<number> = purge<number>(numbers);
+// console.log(purgedNumber);
+
+// class literal
+// const Newspaper = class extends ReferenceItem {
+//     printCitation() {
+//         console.log(`Citation from a newspaper ${this.title}`);
+//     }
+// }
+
+// let australian = new Newspaper("The Australian", 2017);
+// australian.printItem();
+// australian.printCitation();
 
 // abstract class
 // const encyclopediaBook = new Encyclopedia("World Encyc", 1999, 3);

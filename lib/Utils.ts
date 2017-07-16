@@ -10,3 +10,7 @@ function privateFunc (): void {
     console.log("this is a private function...");
 }
 
+// this is a generic function of type T, it will take an array of T type as its parameters and return an array of T type
+export function purge<T> (list: Array<T>): Array<T> {
+    return list.splice(2, list.length);
+}
