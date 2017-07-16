@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var enums_1 = require("./enums");
+var classes_1 = require("./classes");
 function getAllBooks() {
     var books = [
         { id: 1, title: "Node JS Guide", author: "justjavac", available: true, category: enums_1.Category.Biography },
@@ -64,19 +65,27 @@ function getBookTitles(filterProperty) {
     }
 }
 /******************************************************************************************/
-var faviorateAuthor = {
-    name: "Foo",
-    email: "foo@gmail.com",
-    numBooksPublished: 10
-};
-var UTSLibrarian = {
-    name: "Bar",
-    email: "bar@gmail.com",
-    department: "UTS building 5",
-    assistCustomer: function (name) {
-        console.log(this.name + " is helping " + name);
-    }
-};
+var ref = new classes_1.ReferenceItem("Foo Item", 1986);
+ref.printItem();
+ref.publisher = "Random Publisher";
+console.log(ref.publisher);
+// let faviorateLibrarian: Librarian;
+// faviorateLibrarian = new UniLibrarian();
+// faviorateLibrarian.name = "Foo";
+// faviorateLibrarian.assistCustomer("Bar");
+// const faviorateAuthor: Author = {
+//     name: "Foo",
+//     email: "foo@gmail.com",
+//     numBooksPublished: 10
+// };
+// const UTSLibrarian: Librarian = {
+//     name: "Bar",
+//     email: "bar@gmail.com",
+//     department: "UTS building 5",
+//     assistCustomer: function(name){
+//         console.log(this.name + " is helping " + name);
+//     }
+// }
 // const myBook: Book = {
 //     id: 9,
 //     title: "Random book",

@@ -1,5 +1,6 @@
 import { Category } from './enums';
 import { Book, DamageLogger, Librarian, Author } from './interfaces';
+import { UniLibrarian, ReferenceItem } from './classes';
 
 function getAllBooks(): Book[] {
     let books = [
@@ -75,20 +76,33 @@ function getBookTitles (filterProperty: string | boolean): string[] {
 
 /******************************************************************************************/
 
-const faviorateAuthor: Author = {
-    name: "Foo",
-    email: "foo@gmail.com",
-    numBooksPublished: 10
-};
+const ref: ReferenceItem = new ReferenceItem("Foo Item", 1986);
+ref.printItem();
 
-const UTSLibrarian: Librarian = {
-    name: "Bar",
-    email: "bar@gmail.com",
-    department: "UTS building 5",
-    assistCustomer: function(name){
-        console.log(this.name + " is helping " + name);
-    }
-}
+ref.publisher = "Random Publisher";
+console.log(ref.publisher);
+
+
+
+// let faviorateLibrarian: Librarian;
+// faviorateLibrarian = new UniLibrarian();
+// faviorateLibrarian.name = "Foo";
+// faviorateLibrarian.assistCustomer("Bar");
+
+// const faviorateAuthor: Author = {
+//     name: "Foo",
+//     email: "foo@gmail.com",
+//     numBooksPublished: 10
+// };
+
+// const UTSLibrarian: Librarian = {
+//     name: "Bar",
+//     email: "bar@gmail.com",
+//     department: "UTS building 5",
+//     assistCustomer: function(name){
+//         console.log(this.name + " is helping " + name);
+//     }
+// }
 
 // const myBook: Book = {
 //     id: 9,
