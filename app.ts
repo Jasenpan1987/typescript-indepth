@@ -7,7 +7,7 @@ import Shelf from './shelf';
 import * as _ from 'lodash';
 
 const snakeCaseTitle = _.snakeCase("Something Good To Have");
-console.log(snakeCaseTitle);
+// console.log(snakeCaseTitle);
 
 function getAllBooks(): Book[] {
     let books = [
@@ -79,33 +79,51 @@ function getBookTitles (filterProperty: string | boolean): string[] {
     }
 }
 
+function printBookInfo ({ title: bookTitle, author: bookAuthor }: Book): void {
+    console.log(`Title: ${bookTitle}, Author: ${bookAuthor}`);
+}
+
+function logFavoriteBooks ([book1, ...others]: Book[]): void {
+    printBookInfo(book1);
+    others.forEach((book: Book) => {
+        console.log(book.title);
+    });
+}
+
 
 
 /******************************************************************************************/
 
-const inventory: Array<Book> = [
-    { id: 1, title:"Node JS Guide", author: "justjavac", available: true, category: Category.Biography },
-    { id: 2, title: "Introduction to react", author: "facebook", available: true, category: Category.Fiction },
-    { id: 3, title: "How to use firebase", author: "google", available: false, category: Category.Poetry }
-];
+// logFavoriteBooks(getAllBooks());
 
-const mag: Array<Magazine> = [
-    { title: "Coding every month", publisher: "Packt"},
-    { title: "Awesome JS", publisher: "Packt"},
-    { title: "New Node", publisher: "Orally"}
-];
+// const [ book1, book2 ] = getAllBooks();
+// printBookInfo(book1);
+// printBookInfo(book2);
 
-const bookShelf: Shelf<Book> = new Shelf<Book>(); // bookshelf with Book
-inventory.forEach(book => bookShelf.add(book));
-console.log(bookShelf.getFirst().title);
 
-const magShelf: Shelf<Magazine> = new Shelf<Magazine>(); // bookshelf with Magazine
-mag.forEach(m => magShelf.add(m));
-console.log(magShelf.getFirst().title);
+// const inventory: Array<Book> = [
+//     { id: 1, title:"Node JS Guide", author: "justjavac", available: true, category: Category.Biography },
+//     { id: 2, title: "Introduction to react", author: "facebook", available: true, category: Category.Fiction },
+//     { id: 3, title: "How to use firebase", author: "google", available: false, category: Category.Poetry }
+// ];
 
-magShelf.printTitles();
-const firstMagazineOnShelf: Magazine = magShelf.getFirst();
-console.log(firstMagazineOnShelf.title);
+// const mag: Array<Magazine> = [
+//     { title: "Coding every month", publisher: "Packt"},
+//     { title: "Awesome JS", publisher: "Packt"},
+//     { title: "New Node", publisher: "Orally"}
+// ];
+
+// const bookShelf: Shelf<Book> = new Shelf<Book>(); // bookshelf with Book
+// inventory.forEach(book => bookShelf.add(book));
+// console.log(bookShelf.getFirst().title);
+
+// const magShelf: Shelf<Magazine> = new Shelf<Magazine>(); // bookshelf with Magazine
+// mag.forEach(m => magShelf.add(m));
+// console.log(magShelf.getFirst().title);
+
+// magShelf.printTitles();
+// const firstMagazineOnShelf: Magazine = magShelf.getFirst();
+// console.log(firstMagazineOnShelf.title);
 
 // generic function
 // const inventory: Array<Book> = [

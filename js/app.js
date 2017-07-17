@@ -1,10 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var enums_1 = require("./enums");
-var shelf_1 = require("./shelf");
 var _ = require("lodash");
 var snakeCaseTitle = _.snakeCase("Something Good To Have");
-console.log(snakeCaseTitle);
+// console.log(snakeCaseTitle);
 function getAllBooks() {
     var books = [
         { id: 1, title: "Node JS Guide", author: "justjavac", available: true, category: enums_1.Category.Biography },
@@ -67,26 +66,41 @@ function getBookTitles(filterProperty) {
             .map(function (book) { return book.title; });
     }
 }
+function printBookInfo(_a) {
+    var bookTitle = _a.title, bookAuthor = _a.author;
+    console.log("Title: " + bookTitle + ", Author: " + bookAuthor);
+}
+function logFavoriteBooks(_a) {
+    var book1 = _a[0], others = _a.slice(1);
+    printBookInfo(book1);
+    others.forEach(function (book) {
+        console.log(book.title);
+    });
+}
 /******************************************************************************************/
-var inventory = [
-    { id: 1, title: "Node JS Guide", author: "justjavac", available: true, category: enums_1.Category.Biography },
-    { id: 2, title: "Introduction to react", author: "facebook", available: true, category: enums_1.Category.Fiction },
-    { id: 3, title: "How to use firebase", author: "google", available: false, category: enums_1.Category.Poetry }
-];
-var mag = [
-    { title: "Coding every month", publisher: "Packt" },
-    { title: "Awesome JS", publisher: "Packt" },
-    { title: "New Node", publisher: "Orally" }
-];
-var bookShelf = new shelf_1.default(); // bookshelf with Book
-inventory.forEach(function (book) { return bookShelf.add(book); });
-console.log(bookShelf.getFirst().title);
-var magShelf = new shelf_1.default(); // bookshelf with Magazine
-mag.forEach(function (m) { return magShelf.add(m); });
-console.log(magShelf.getFirst().title);
-magShelf.printTitles();
-var firstMagazineOnShelf = magShelf.getFirst();
-console.log(firstMagazineOnShelf.title);
+// logFavoriteBooks(getAllBooks());
+// const [ book1, book2 ] = getAllBooks();
+// printBookInfo(book1);
+// printBookInfo(book2);
+// const inventory: Array<Book> = [
+//     { id: 1, title:"Node JS Guide", author: "justjavac", available: true, category: Category.Biography },
+//     { id: 2, title: "Introduction to react", author: "facebook", available: true, category: Category.Fiction },
+//     { id: 3, title: "How to use firebase", author: "google", available: false, category: Category.Poetry }
+// ];
+// const mag: Array<Magazine> = [
+//     { title: "Coding every month", publisher: "Packt"},
+//     { title: "Awesome JS", publisher: "Packt"},
+//     { title: "New Node", publisher: "Orally"}
+// ];
+// const bookShelf: Shelf<Book> = new Shelf<Book>(); // bookshelf with Book
+// inventory.forEach(book => bookShelf.add(book));
+// console.log(bookShelf.getFirst().title);
+// const magShelf: Shelf<Magazine> = new Shelf<Magazine>(); // bookshelf with Magazine
+// mag.forEach(m => magShelf.add(m));
+// console.log(magShelf.getFirst().title);
+// magShelf.printTitles();
+// const firstMagazineOnShelf: Magazine = magShelf.getFirst();
+// console.log(firstMagazineOnShelf.title);
 // generic function
 // const inventory: Array<Book> = [
 //     { id: 1, title:"Node JS Guide", author: "justjavac", available: true, category: Category.Biography },
