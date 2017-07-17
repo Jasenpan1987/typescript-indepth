@@ -31,9 +31,24 @@ var UniLibrarian = (function () {
     UniLibrarian.prototype.assistCustomer = function (customerName) {
         console.log("Helping " + customerName);
     };
+    UniLibrarian.prototype.assistAuthority = function () {
+        console.log("assisting authority");
+    };
     return UniLibrarian;
 }());
 exports.UniLibrarian = UniLibrarian;
+var PublicLibrarian = (function () {
+    function PublicLibrarian() {
+    }
+    PublicLibrarian.prototype.assistCustomer = function (customerName) {
+        console.log("Helping " + customerName);
+    };
+    PublicLibrarian.prototype.teachCommunity = function () {
+        console.log("Teaching community");
+    };
+    return PublicLibrarian;
+}());
+exports.PublicLibrarian = PublicLibrarian;
 var ReferenceItem = (function () {
     function ReferenceItem(title, year, author) {
         this.title = title;

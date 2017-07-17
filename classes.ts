@@ -31,11 +31,29 @@ class UniLibrarian implements Librarian, Employee, Researcher {
         console.log("Helping " + customerName);
     }
 
+    assistAuthority () {
+        console.log("assisting authority");
+    }
+
     title: string;
 
     addToSchedule: () => void;
     logTitle: () => void;
     doResearch: (topic: string) => void;
+}
+
+class PublicLibrarian implements Librarian {
+    name: string;
+    email: string;
+    department: string;
+
+    assistCustomer (customerName: string): void {
+        console.log("Helping " + customerName);
+    }
+
+    teachCommunity () {
+        console.log("Teaching community");
+    }
 }
 
 abstract class ReferenceItem {
@@ -68,4 +86,4 @@ abstract class ReferenceItem {
 
 
 
-export { UniLibrarian, ReferenceItem, Employee, Researcher };
+export { UniLibrarian, PublicLibrarian, ReferenceItem, Employee, Researcher };

@@ -1,6 +1,6 @@
 import { Category } from './enums';
 import { Book, DamageLogger, Librarian, Author, Magazine } from './interfaces';
-import { UniLibrarian, ReferenceItem, Employee, Researcher } from './classes';
+import { UniLibrarian, PublicLibrarian, ReferenceItem, Employee, Researcher } from './classes';
 import Encyclopedia from './encyclopedia';
 import { calculateLateFee as calLateFee, maxBooksAllowed, purge, applyMixins } from './lib/Utils';
 import Shelf from './shelf';
@@ -295,33 +295,60 @@ import * as _ from 'lodash';
 
 
 // /******************************************************************************************/
-// Polymophic this and fluent API
-class LibraryBook {
-    checkin(): this {
-        if(this instanceof ChildrenBook) { // context sensitive code
-            console.log("Check in a children book");
-        } else {
-            console.log("Check in a book");
-        }
-        return this
-    }
+// // Polymophic this and fluent API
+// class LibraryBook {
+//     checkin(): this {
+//         if(this instanceof ChildrenBook) { // context sensitive code
+//             console.log("Check in a children book");
+//         } else {
+//             console.log("Check in a book");
+//         }
+//         return this
+//     }
 
-    checkout(): this {
-        console.log("check out a book");
-        return this
+//     checkout(): this {
+//         console.log("check out a book");
+//         return this
+//     }
+// }
+
+// class ChildrenBook extends LibraryBook {
+//     clean(): this {
+//         console.log("clean a book");
+//         return this;
+//     }
+// }
+
+// // Polymophic this means the this keyword refers to different object depends on the context it getting called
+// // fluent api means methods of a class return the instance which calling it to enable chaining
+// const kidBook = new ChildrenBook();
+// kidBook.checkin()
+//     .checkout()
+//     .clean();
+
+// Type Guard
+// there are 3 types of type guard available: typeof, instanceof and user-defined type guard function
+// 1) typeof
+function logVisitor (param: number | string) { // typeof can be used to compare premetive types
+    if (typeof param === 'number') {
+        console.log (`${param} is a number`);
+    } else {
+        console.log (`${param.toUpperCase} is a string`);
     }
 }
 
-class ChildrenBook extends LibraryBook {
-    clean(): this {
-        console.log("clean a book");
-        return this;
+// 2) instanceof
+function librarianDoJob (librarian: UniLibrarian | PublicLibrarian) { // with instance from a class
+    if (librarian instanceof UniLibrarian) {
+        librarian.assistAuthority();
+    }
+
+    if (librarian instanceof PublicLibrarian) {
+        librarian.teachCommunity();
     }
 }
 
-// Polymophic this means the this keyword refers to different object depends on the context it getting called
-// fluent api means methods of a class return the instance which calling it to enable chaining
-const kidBook = new ChildrenBook();
-kidBook.checkin()
-    .checkout()
-    .clean();
+// 3) user-defined type guard
+function isBook (text: Book | Magazine): text is Book {
+    return (<Book> text).author !== undefined;
+}

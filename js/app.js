@@ -1,15 +1,6 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
+var classes_1 = require("./classes");
 // const snakeCaseTitle = _.snakeCase("Something Good To Have");
 // // console.log(snakeCaseTitle);
 // function getAllBooks(): Book[] {
@@ -233,40 +224,55 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // // const allFictionBookTitles = getBookTitlesByCategory(Category.Fiction);
 // // logBookTitles(allFictionBookTitles);
 // /******************************************************************************************/
-// Polymophic this and fluent API
-var LibraryBook = (function () {
-    function LibraryBook() {
+// // Polymophic this and fluent API
+// class LibraryBook {
+//     checkin(): this {
+//         if(this instanceof ChildrenBook) { // context sensitive code
+//             console.log("Check in a children book");
+//         } else {
+//             console.log("Check in a book");
+//         }
+//         return this
+//     }
+//     checkout(): this {
+//         console.log("check out a book");
+//         return this
+//     }
+// }
+// class ChildrenBook extends LibraryBook {
+//     clean(): this {
+//         console.log("clean a book");
+//         return this;
+//     }
+// }
+// // Polymophic this means the this keyword refers to different object depends on the context it getting called
+// // fluent api means methods of a class return the instance which calling it to enable chaining
+// const kidBook = new ChildrenBook();
+// kidBook.checkin()
+//     .checkout()
+//     .clean();
+// Type Guard
+// there are 3 types of type guard available: typeof, instanceof and user-defined type guard function
+// 1) typeof
+function logVisitor(param) {
+    if (typeof param === 'number') {
+        console.log(param + " is a number");
     }
-    LibraryBook.prototype.checkin = function () {
-        if (this instanceof ChildrenBook) {
-            console.log("Check in a children book");
-        }
-        else {
-            console.log("Check in a book");
-        }
-        return this;
-    };
-    LibraryBook.prototype.checkout = function () {
-        console.log("check out a book");
-        return this;
-    };
-    return LibraryBook;
-}());
-var ChildrenBook = (function (_super) {
-    __extends(ChildrenBook, _super);
-    function ChildrenBook() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    else {
+        console.log(param.toUpperCase + " is a string");
     }
-    ChildrenBook.prototype.clean = function () {
-        console.log("clean a book");
-        return this;
-    };
-    return ChildrenBook;
-}(LibraryBook));
-// Polymophic this means the this keyword refers to different object depends on the context it getting called
-// fluent api means methods of a class return the instance which calling it to enable chaining
-var kidBook = new ChildrenBook();
-kidBook.checkin()
-    .checkout()
-    .clean();
+}
+// 2) instanceof
+function librarianDoJob(librarian) {
+    if (librarian instanceof classes_1.UniLibrarian) {
+        librarian.assistAuthority();
+    }
+    if (librarian instanceof classes_1.PublicLibrarian) {
+        librarian.teachCommunity();
+    }
+}
+// 3) user-defined type guard
+function isBook(text) {
+    return text.author !== undefined;
+}
 //# sourceMappingURL=app.js.map
