@@ -90,6 +90,14 @@ function logFavoriteBooks ([book1, ...others]: Book[]): void {
     });
 }
 
+function getAllMagazines (): Magazine[] {
+    return [
+        { title: "Coding every month", publisher: "Packt"},
+        { title: "Awesome JS", publisher: "Packt"},
+        { title: "New Node", publisher: "Orally"}
+    ];
+}
+
 // Tuple Type
 let catalogLocation: [string, Book] = ['A 123.456', getAllBooks()[0]]; // this is a tuple type, which means the first element should be a 
 // string type, and the second element of the array should be a type of Book, other elements can be either a string or a book
@@ -104,6 +112,25 @@ interface KeyValuePair<K, V> extends Array<K | V> {
 
 let catalogLocation2: KeyValuePair<string, Book> = ['123 ABC', getAllBooks()[1]]; // also works
 
+// Union Type
+const allBooks = getAllBooks();
+const allMagazines = getAllMagazines();
+
+const readingMaterial: Magazine | Book = allMagazines[0];
+
+function printTitle (readingMaterial: Book | Magazine): void { // only take Book or Magazine type as its parameter
+    console.log(readingMaterial.title);
+}
+
+// Intersaction TYpe
+const novel: Magazine & Book = { // should have all the properties of a book and a magazine
+    id: 1, 
+    title:"Node JS Guide", 
+    author: "justjavac", 
+    available: true, 
+    category: Category.Biography,
+    publisher: "Packt"
+}
 
 /******************************************************************************************/
 

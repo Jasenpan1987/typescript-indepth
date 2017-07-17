@@ -77,12 +77,35 @@ function logFavoriteBooks(_a) {
         console.log(book.title);
     });
 }
+function getAllMagazines() {
+    return [
+        { title: "Coding every month", publisher: "Packt" },
+        { title: "Awesome JS", publisher: "Packt" },
+        { title: "New Node", publisher: "Orally" }
+    ];
+}
 // Tuple Type
 var catalogLocation = ['A 123.456', getAllBooks()[0]]; // this is a tuple type, which means the first element should be a 
 // string type, and the second element of the array should be a type of Book, other elements can be either a string or a book
 catalogLocation[2] = 'Foo'; // works
 ;
 var catalogLocation2 = ['123 ABC', getAllBooks()[1]]; // also works
+// Union Type
+var allBooks = getAllBooks();
+var allMagazines = getAllMagazines();
+var readingMaterial = allMagazines[0];
+function printTitle(readingMaterial) {
+    console.log(readingMaterial.title);
+}
+// Intersaction TYpe
+var novel = {
+    id: 1,
+    title: "Node JS Guide",
+    author: "justjavac",
+    available: true,
+    category: enums_1.Category.Biography,
+    publisher: "Packt"
+};
 /******************************************************************************************/
 // logFavoriteBooks(getAllBooks());
 // const [ book1, book2 ] = getAllBooks();
