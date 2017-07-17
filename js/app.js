@@ -77,6 +77,12 @@ function logFavoriteBooks(_a) {
         console.log(book.title);
     });
 }
+// Tuple Type
+var catalogLocation = ['A 123.456', getAllBooks()[0]]; // this is a tuple type, which means the first element should be a 
+// string type, and the second element of the array should be a type of Book, other elements can be either a string or a book
+catalogLocation[2] = 'Foo'; // works
+;
+var catalogLocation2 = ['123 ABC', getAllBooks()[1]]; // also works
 /******************************************************************************************/
 // logFavoriteBooks(getAllBooks());
 // const [ book1, book2 ] = getAllBooks();

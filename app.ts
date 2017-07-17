@@ -90,6 +90,19 @@ function logFavoriteBooks ([book1, ...others]: Book[]): void {
     });
 }
 
+// Tuple Type
+let catalogLocation: [string, Book] = ['A 123.456', getAllBooks()[0]]; // this is a tuple type, which means the first element should be a 
+// string type, and the second element of the array should be a type of Book, other elements can be either a string or a book
+catalogLocation[2] = 'Foo'; // works
+// catalogLocation[3] = false; // not work
+
+// create a interface that works similar to the tuple type
+interface KeyValuePair<K, V> extends Array<K | V> {
+    0: K,
+    1: V
+};
+
+let catalogLocation2: KeyValuePair<string, Book> = ['123 ABC', getAllBooks()[1]]; // also works
 
 
 /******************************************************************************************/
