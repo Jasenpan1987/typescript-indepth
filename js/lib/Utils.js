@@ -16,4 +16,13 @@ function purge(list) {
     return list.splice(2, list.length);
 }
 exports.purge = purge;
+// this is the function to handle mixins
+function applyMixins(derivedCtor, baseCtors) {
+    baseCtors.forEach(function (baseCtor) {
+        Object.getOwnPropertyNames(baseCtor.prototype).forEach(function (name) {
+            derivedCtor.prototype[name] = baseCtor.prototype[name];
+        });
+    });
+}
+exports.applyMixins = applyMixins;
 //# sourceMappingURL=Utils.js.map

@@ -1,6 +1,28 @@
 import { Book, DamageLogger, Author, Librarian } from './interfaces';
 
-class UniLibrarian implements Librarian {
+class Employee {
+    title: string;
+
+    addToSchedule(): void {
+        console.log("Employee added to schedual...");
+    }
+
+    logTitle(): void {
+        console.log(`Employee's title: ${this.title}`);
+    }
+}
+
+class Researcher {
+    doResearch(topic: string): void {
+        console.log(`Researcher's topic is ${topic}`);
+    }
+}
+
+// Mixins
+// 1) need to IMPLEMENT all the classes you needed just like implements interfaces
+// 2) added function/property types of the interfaces that requires
+// 3) take a look at applyMixin function in the Utils.ts
+class UniLibrarian implements Librarian, Employee, Researcher {
     name: string;
     email: string;
     department: string;
@@ -8,6 +30,12 @@ class UniLibrarian implements Librarian {
     assistCustomer (customerName: string): void {
         console.log("Helping " + customerName);
     }
+
+    title: string;
+
+    addToSchedule: () => void;
+    logTitle: () => void;
+    doResearch: (topic: string) => void;
 }
 
 abstract class ReferenceItem {
@@ -40,4 +68,4 @@ abstract class ReferenceItem {
 
 
 
-export { UniLibrarian, ReferenceItem };
+export { UniLibrarian, ReferenceItem, Employee, Researcher };

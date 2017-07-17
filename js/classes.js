@@ -1,5 +1,30 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var Employee = (function () {
+    function Employee() {
+    }
+    Employee.prototype.addToSchedule = function () {
+        console.log("Employee added to schedual...");
+    };
+    Employee.prototype.logTitle = function () {
+        console.log("Employee's title: " + this.title);
+    };
+    return Employee;
+}());
+exports.Employee = Employee;
+var Researcher = (function () {
+    function Researcher() {
+    }
+    Researcher.prototype.doResearch = function (topic) {
+        console.log("Researcher's topic is " + topic);
+    };
+    return Researcher;
+}());
+exports.Researcher = Researcher;
+// Mixins
+// 1) need to IMPLEMENT all the classes you needed just like implements interfaces
+// 2) added function/property types of the interfaces that requires
+// 3) take a look at applyMixin function in the Utils.ts
 var UniLibrarian = (function () {
     function UniLibrarian() {
     }

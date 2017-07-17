@@ -14,3 +14,12 @@ function privateFunc (): void {
 export function purge<T> (list: Array<T>): Array<T> {
     return list.splice(2, list.length);
 }
+
+// this is the function to handle mixins
+export function applyMixins (derivedCtor: any, baseCtors: any[]) {
+    baseCtors.forEach(baseCtor => {
+        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+            derivedCtor.prototype[name] = baseCtor.prototype[name];
+        });
+    });
+}

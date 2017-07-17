@@ -1,8 +1,8 @@
 import { Category } from './enums';
 import { Book, DamageLogger, Librarian, Author, Magazine } from './interfaces';
-import { UniLibrarian, ReferenceItem } from './classes';
+import { UniLibrarian, ReferenceItem, Employee, Researcher } from './classes';
 import Encyclopedia from './encyclopedia';
-import { calculateLateFee as calLateFee, maxBooksAllowed, purge } from './lib/Utils';
+import { calculateLateFee as calLateFee, maxBooksAllowed, purge, applyMixins } from './lib/Utils';
 import Shelf from './shelf';
 import * as _ from 'lodash';
 
@@ -98,41 +98,52 @@ function getAllMagazines (): Magazine[] {
     ];
 }
 
-// Tuple Type
-let catalogLocation: [string, Book] = ['A 123.456', getAllBooks()[0]]; // this is a tuple type, which means the first element should be a 
-// string type, and the second element of the array should be a type of Book, other elements can be either a string or a book
-catalogLocation[2] = 'Foo'; // works
-// catalogLocation[3] = false; // not work
+// // Tuple Type
+// let catalogLocation: [string, Book] = ['A 123.456', getAllBooks()[0]]; // this is a tuple type, which means the first element should be a 
+// // string type, and the second element of the array should be a type of Book, other elements can be either a string or a book
+// catalogLocation[2] = 'Foo'; // works
+// // catalogLocation[3] = false; // not work
 
-// create a interface that works similar to the tuple type
-interface KeyValuePair<K, V> extends Array<K | V> {
-    0: K,
-    1: V
-};
+// // create a interface that works similar to the tuple type
+// interface KeyValuePair<K, V> extends Array<K | V> {
+//     0: K,
+//     1: V
+// };
 
-let catalogLocation2: KeyValuePair<string, Book> = ['123 ABC', getAllBooks()[1]]; // also works
+// let catalogLocation2: KeyValuePair<string, Book> = ['123 ABC', getAllBooks()[1]]; // also works
 
-// Union Type
-const allBooks = getAllBooks();
-const allMagazines = getAllMagazines();
+// // Union Type
+// const allBooks = getAllBooks();
+// const allMagazines = getAllMagazines();
 
-const readingMaterial: Magazine | Book = allMagazines[0];
+// const readingMaterial: Magazine | Book = allMagazines[0];
 
-function printTitle (readingMaterial: Book | Magazine): void { // only take Book or Magazine type as its parameter
-    console.log(readingMaterial.title);
-}
+// function printTitle (readingMaterial: Book | Magazine): void { // only take Book or Magazine type as its parameter
+//     console.log(readingMaterial.title);
+// }
 
-// Intersaction TYpe
-const novel: Magazine & Book = { // should have all the properties of a book and a magazine
-    id: 1, 
-    title:"Node JS Guide", 
-    author: "justjavac", 
-    available: true, 
-    category: Category.Biography,
-    publisher: "Packt"
-}
+// // Intersaction TYpe
+// const novel: Magazine & Book = { // should have all the properties of a book and a magazine
+//     id: 1, 
+//     title:"Node JS Guide", 
+//     author: "justjavac", 
+//     available: true, 
+//     category: Category.Biography,
+//     publisher: "Packt"
+// }
+
+
 
 /******************************************************************************************/
+
+// Mixins => just like multi inheritance
+applyMixins(UniLibrarian, [Researcher, Employee]); // complete the mixin
+
+// console.log(UniLibrarian.prototype)
+
+const utsLibrarian = new UniLibrarian(); // now the instance of UniLibrarian has the properties and methods of the derived classes
+utsLibrarian.addToSchedule();
+
 
 // logFavoriteBooks(getAllBooks());
 
