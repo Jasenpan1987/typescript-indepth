@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var enums_1 = require("./enums");
-var classes_1 = require("./classes");
-var Utils_1 = require("./lib/Utils");
 var _ = require("lodash");
 var snakeCaseTitle = _.snakeCase("Something Good To Have");
 // console.log(snakeCaseTitle);
@@ -86,39 +84,32 @@ function getAllMagazines() {
         { title: "New Node", publisher: "Orally" }
     ];
 }
-// // Tuple Type
-// let catalogLocation: [string, Book] = ['A 123.456', getAllBooks()[0]]; // this is a tuple type, which means the first element should be a 
-// // string type, and the second element of the array should be a type of Book, other elements can be either a string or a book
-// catalogLocation[2] = 'Foo'; // works
-// // catalogLocation[3] = false; // not work
-// // create a interface that works similar to the tuple type
-// interface KeyValuePair<K, V> extends Array<K | V> {
-//     0: K,
-//     1: V
-// };
-// let catalogLocation2: KeyValuePair<string, Book> = ['123 ABC', getAllBooks()[1]]; // also works
-// // Union Type
-// const allBooks = getAllBooks();
-// const allMagazines = getAllMagazines();
-// const readingMaterial: Magazine | Book = allMagazines[0];
-// function printTitle (readingMaterial: Book | Magazine): void { // only take Book or Magazine type as its parameter
-//     console.log(readingMaterial.title);
-// }
-// // Intersaction TYpe
-// const novel: Magazine & Book = { // should have all the properties of a book and a magazine
-//     id: 1, 
-//     title:"Node JS Guide", 
-//     author: "justjavac", 
-//     available: true, 
-//     category: Category.Biography,
-//     publisher: "Packt"
-// }
+var allBooks = getAllBooks();
+var allMagazines = getAllMagazines();
+var readingMaterial = allMagazines[0];
+function printTitle(readingMaterial) {
+    console.log(readingMaterial.title);
+}
+// Intersaction TYpe
+var novel = {
+    id: 1,
+    title: "Node JS Guide",
+    author: "justjavac",
+    available: true,
+    category: enums_1.Category.Biography,
+    publisher: "Packt"
+};
 /******************************************************************************************/
-// Mixins => just like multi inheritance
-Utils_1.applyMixins(classes_1.UniLibrarian, [classes_1.Researcher, classes_1.Employee]); // complete the mixin
-// console.log(UniLibrarian.prototype)
-var utsLibrarian = new classes_1.UniLibrarian(); // now the instance of UniLibrarian has the properties and methods of the derived classes
-utsLibrarian.addToSchedule();
+// string literal and type alias
+var frenquency = 'Monthly';
+function getMagazineByFrenq(frenq) {
+    console.log(frenq);
+}
+// // Mixins => just like multi inheritance
+// applyMixins(UniLibrarian, [Researcher, Employee]); // complete the mixin
+// // console.log(UniLibrarian.prototype)
+// const utsLibrarian = new UniLibrarian(); // now the instance of UniLibrarian has the properties and methods of the derived classes
+// utsLibrarian.addToSchedule();
 // logFavoriteBooks(getAllBooks());
 // const [ book1, book2 ] = getAllBooks();
 // printBookInfo(book1);

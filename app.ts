@@ -113,36 +113,52 @@ function getAllMagazines (): Magazine[] {
 // let catalogLocation2: KeyValuePair<string, Book> = ['123 ABC', getAllBooks()[1]]; // also works
 
 // // Union Type
-// const allBooks = getAllBooks();
-// const allMagazines = getAllMagazines();
+type PrintMaterial = Book | Magazine;
+type Serial = Book & Magazine;
 
-// const readingMaterial: Magazine | Book = allMagazines[0];
+const allBooks = getAllBooks();
+const allMagazines = getAllMagazines();
 
-// function printTitle (readingMaterial: Book | Magazine): void { // only take Book or Magazine type as its parameter
-//     console.log(readingMaterial.title);
-// }
+const readingMaterial: PrintMaterial = allMagazines[0];
 
-// // Intersaction TYpe
-// const novel: Magazine & Book = { // should have all the properties of a book and a magazine
-//     id: 1, 
-//     title:"Node JS Guide", 
-//     author: "justjavac", 
-//     available: true, 
-//     category: Category.Biography,
-//     publisher: "Packt"
-// }
+function printTitle (readingMaterial: PrintMaterial): void { // only take Book or Magazine type as its parameter
+    console.log(readingMaterial.title);
+}
+
+// Intersaction TYpe
+const novel: Serial = { // should have all the properties of a book and a magazine
+    id: 1, 
+    title:"Node JS Guide", 
+    author: "justjavac", 
+    available: true, 
+    category: Category.Biography,
+    publisher: "Packt"
+}
 
 
 
 /******************************************************************************************/
 
-// Mixins => just like multi inheritance
-applyMixins(UniLibrarian, [Researcher, Employee]); // complete the mixin
+// string literal and type alias
+let frenquency: 'Monthly' | 'Annually' = 'Monthly'; 
+// indicate frenquency can only be one of the 'Monthly' or 'Annually', others will cause error
 
-// console.log(UniLibrarian.prototype)
+type Frenq = 'Monthly' | 'Weekly' | 'Daily' | 'Annually'; // type alias
 
-const utsLibrarian = new UniLibrarian(); // now the instance of UniLibrarian has the properties and methods of the derived classes
-utsLibrarian.addToSchedule();
+function getMagazineByFrenq (frenq: Frenq): void { // type alias can makes the code shorter
+    console.log(frenq);
+}
+
+
+
+
+// // Mixins => just like multi inheritance
+// applyMixins(UniLibrarian, [Researcher, Employee]); // complete the mixin
+
+// // console.log(UniLibrarian.prototype)
+
+// const utsLibrarian = new UniLibrarian(); // now the instance of UniLibrarian has the properties and methods of the derived classes
+// utsLibrarian.addToSchedule();
 
 
 // logFavoriteBooks(getAllBooks());
