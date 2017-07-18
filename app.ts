@@ -387,15 +387,15 @@ function getBookTitlesByCategory (category: Category=Category.Fiction): Array<st
 
 // async operations
 // 1) callback
-interface LibMgrCallback { // callback function type (error-first)
+interface ILibMgrCallback { // callback function type (error-first)
     (error: Error, titles: string[]): void;
 }
 
-function getBookByCategoryCb(cat: Category, callback: LibMgrCallback): void {
+function getBookByCategoryCb(cat: Category, callback: ILibMgrCallback): void {
     setTimeout(() => {
-        try{
+        try {
             const foundBookTitles: string[] = getBookTitlesByCategory(cat);
-            if(foundBookTitles.length > 0){
+            if (foundBookTitles.length > 0) {
                 callback(null, foundBookTitles);
             } else {
                 throw new Error("no book has been found...");
@@ -407,7 +407,7 @@ function getBookByCategoryCb(cat: Category, callback: LibMgrCallback): void {
 }
 
 function logCateSearch(error: Error, results: string[]): void{
-    if(error) {
+    if (error) {
         console.log("Error: ", error.message);
     } else {
         results.forEach((item: string, idx) => {
@@ -419,11 +419,12 @@ function logCateSearch(error: Error, results: string[]): void{
 // getBookByCategoryCb(Category.Biography, logCateSearch);
 
 // 2) promise
-function getBookByCategoryPromise(cat: Category): Promise<string[]> { // the return type of a promise is the type of value it returns once getting resolved
-    const p: Promise<string[]> = new Promise((resolve: Function, reject: Function) => {
+function getBookByCategoryPromise(cat: Category): Promise<string[]> {
+    // the return type of a promise is the type of value it returns once getting resolved
+    const p: Promise<string[]> = new Promise((resolve, reject) => {
         setTimeout(() => {
             const foundBookTitles: string[] = getBookTitlesByCategory(cat);
-            if(foundBookTitles.length > 0){
+            if (foundBookTitles.length > 0) {
                 resolve(foundBookTitles);
             } else {
                 reject("No book was found...");
@@ -448,11 +449,12 @@ function getBookByCategoryPromise(cat: Category): Promise<string[]> { // the ret
 //     });
 
 // 3) async await
-function getBookByCategoryAsync(cat: Category): Promise<string[]> { // the return type of a promise is the type of value it returns once getting resolved
-    const p: Promise<string[]> = new Promise((resolve: Function, reject: Function) => {
+function getBookByCategoryAsync(cat: Category):
+    Promise<string[]> { // the return type of a promise is the type of value it returns once getting resolved
+    const p: Promise<string[]> = new Promise((resolve, reject) => {
         setTimeout(() => {
             const foundBookTitles: string[] = getBookTitlesByCategory(cat);
-            if(foundBookTitles.length > 0){
+            if (foundBookTitles.length > 0) {
                 resolve(foundBookTitles);
             } else {
                 reject("No book was found...");
@@ -462,7 +464,7 @@ function getBookByCategoryAsync(cat: Category): Promise<string[]> { // the retur
     return p;
 }
 
-async function logSearchResult (cat: Category) { // async function is like the caller of a promise
+async function logSearchResult(cat: Category) { // async function is like the caller of a promise
     try {
         const bookTitlesFound = await getBookByCategoryAsync(cat); // this will be async
         bookTitlesFound.forEach((title) => {
@@ -477,7 +479,7 @@ async function logSearchResult (cat: Category) { // async function is like the c
 
 // another way of error handling, since the awaited part is also a promise, so we can chain it with .catch or .then
 
-async function logSearchResult2 (cat: Category) { // async function is like the caller of a promise
+async function logSearchResult2(cat: Category) { // async function is like the caller of a promise
     const bookTitlesFound = await getBookByCategoryAsync(cat); // this will be async
     bookTitlesFound.forEach((title) => {
         console.log(title);
@@ -488,6 +490,6 @@ async function logSearchResult2 (cat: Category) { // async function is like the 
 logSearchResult2(Category.Children)
     .then((titles: string[]) => {
         console.log(titles.length + " books found");
-    }).catch(e => {
+    }).catch((e) => {
         console.log("reject reason: " + e.message);
     });
