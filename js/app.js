@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var classes_1 = require("./classes");
 // const snakeCaseTitle = _.snakeCase("Something Good To Have");
 // // console.log(snakeCaseTitle);
 // function getAllBooks(): Book[] {
@@ -251,28 +250,39 @@ var classes_1 = require("./classes");
 // kidBook.checkin()
 //     .checkout()
 //     .clean();
-// Type Guard
-// there are 3 types of type guard available: typeof, instanceof and user-defined type guard function
-// 1) typeof
-function logVisitor(param) {
-    if (typeof param === 'number') {
-        console.log(param + " is a number");
-    }
-    else {
-        console.log(param.toUpperCase + " is a string");
-    }
-}
-// 2) instanceof
-function librarianDoJob(librarian) {
-    if (librarian instanceof classes_1.UniLibrarian) {
-        librarian.assistAuthority();
-    }
-    if (librarian instanceof classes_1.PublicLibrarian) {
-        librarian.teachCommunity();
-    }
-}
-// 3) user-defined type guard
-function isBook(text) {
-    return text.author !== undefined;
-}
+// // Type Guard
+// // there are 3 types of type guard available: typeof, instanceof and user-defined type guard function
+// // 1) typeof
+// function logVisitor (param: number | string) { // typeof can be used to compare premetive types
+//     if (typeof param === 'number') {
+//         console.log (`${param} is a number`);
+//     } else {
+//         console.log (`${param.toUpperCase} is a string`);
+//     }
+// }
+// // 2) instanceof
+// function librarianDoJob (librarian: UniLibrarian | PublicLibrarian) { // with instance from a class
+//     if (librarian instanceof UniLibrarian) {
+//         librarian.assistAuthority();
+//     }
+//     if (librarian instanceof PublicLibrarian) {
+//         librarian.teachCommunity();
+//     }
+// }
+// // 3) user-defined type guard
+// function isBook (text: Book | Magazine): text is Book {
+//     return (<Book> text).author !== undefined;
+// }
+// // Symbol
+// // symbol for computed property => unique
+// let mySymbol = Symbol("first_symbol"); // not a constructor
+// let otherSymbol = Symbol("first_symbol");
+// console.log(mySymbol == otherSymbol, typeof mySymbol); // even two symbols have the same description, they still different symbols
+// // symbol is a premitive type, not an object
+// const myObj = {
+//     [mySymbol]: "foo"
+// }
+// console.log(myObj[mySymbol]);
+// const utsLibrarian = new UniLibrarian();
+// utsLibrarian[MY_SYMBOL](); // works 
 //# sourceMappingURL=app.js.map

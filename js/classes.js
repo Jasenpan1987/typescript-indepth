@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var MY_SYMBOL = Symbol();
+exports.MY_SYMBOL = MY_SYMBOL;
 var Employee = (function () {
     function Employee() {
     }
@@ -33,6 +35,9 @@ var UniLibrarian = (function () {
     };
     UniLibrarian.prototype.assistAuthority = function () {
         console.log("assisting authority");
+    };
+    UniLibrarian.prototype[MY_SYMBOL] = function () {
+        console.log("calling the method with name of symbol...");
     };
     return UniLibrarian;
 }());

@@ -1,5 +1,7 @@
 import { Book, DamageLogger, Author, Librarian } from './interfaces';
 
+const MY_SYMBOL = Symbol();
+
 class Employee {
     title: string;
 
@@ -33,6 +35,10 @@ class UniLibrarian implements Librarian, Employee, Researcher {
 
     assistAuthority () {
         console.log("assisting authority");
+    }
+
+    [MY_SYMBOL](): void { // symbol name
+        console.log("calling the method with name of symbol...");
     }
 
     title: string;
@@ -86,4 +92,4 @@ abstract class ReferenceItem {
 
 
 
-export { UniLibrarian, PublicLibrarian, ReferenceItem, Employee, Researcher };
+export { UniLibrarian, PublicLibrarian, ReferenceItem, Employee, Researcher, MY_SYMBOL };
