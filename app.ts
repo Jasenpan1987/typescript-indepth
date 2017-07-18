@@ -9,15 +9,15 @@ import * as _ from 'lodash';
 // const snakeCaseTitle = _.snakeCase("Something Good To Have");
 // // console.log(snakeCaseTitle);
 
-// function getAllBooks(): Book[] {
-//     let books = [
-//         { id: 1, title:"Node JS Guide", author: "justjavac", available: true, category: Category.Biography },
-//         { id: 2, title: "Introduction to react", author: "facebook", available: true, category: Category.Fiction },
-//         { id: 3, title: "How to use firebase", author: "google", available: false, category: Category.Poetry }
-//     ];
+function getAllBooks(): Book[] {
+    let books = [
+        { id: 1, title:"Node JS Guide", author: "justjavac", available: true, category: Category.Biography },
+        { id: 2, title: "Introduction to react", author: "facebook", available: true, category: Category.Fiction },
+        { id: 3, title: "How to use firebase", author: "google", available: false, category: Category.Poetry }
+    ];
 
-//     return books;
-// }
+    return books;
+}
 
 // function logFirstAvailable (books: Book[]):void {
 //     let numberOfBooks = books.length;
@@ -38,11 +38,11 @@ import * as _ from 'lodash';
 //     return getAllBooks().find(book => book.id === id);
 // }
 
-// function getBookTitlesByCategory (category: Category=Category.Fiction): Array<string> {
-//     console.log(`Getting books with category ${category} (${Category[category]})`);
-//     const allBooks = getAllBooks();
-//     return allBooks.filter((book: Book) => book.category === category).map((book: Book) => book.title);
-// }
+function getBookTitlesByCategory (category: Category=Category.Fiction): Array<string> {
+    console.log(`Getting books with category ${category} (${Category[category]})`);
+    const allBooks = getAllBooks();
+    return allBooks.filter((book: Book) => book.category === category).map((book: Book) => book.title);
+}
 
 // function logBookTitles (titleArr: string[]): void {
 //     titleArr.forEach(title => console.log(`Title: ${title}`));
@@ -367,20 +367,53 @@ import * as _ from 'lodash';
 // const utsLibrarian = new UniLibrarian();
 // utsLibrarian[MY_SYMBOL](); // works
 
-// decorator
-const lib1 = new UniLibrarian();
-const plib = new PublicLibrarian();
+// // decorator
+// const lib1 = new UniLibrarian();
+// const plib = new PublicLibrarian();
 
-const emp = new Employee();
-const emp2 = new Employee();
-// Employee.prototype.addToSchedule = function () { // this will give you an error since addToSchedule has the readOnly decorator
-//     console.log("Im too lazy...");
+// const emp = new Employee();
+// const emp2 = new Employee();
+// // Employee.prototype.addToSchedule = function () { // this will give you an error since addToSchedule has the readOnly decorator
+// //     console.log("Im too lazy...");
+// // }
+// emp2.addToSchedule();
+
+// UniLibrarian.prototype.assistAuthority = function () {
+//     console.log("Im too lazy, dont want to assist anyone!");
 // }
-emp2.addToSchedule();
 
-UniLibrarian.prototype.assistAuthority = function () {
-    console.log("Im too lazy, dont want to assist anyone!");
+// const lib2 = new UniLibrarian();
+// lib2.assistAuthority(); // it will change to the above function
+
+// async operations
+// 1) callback
+interface LibMgrCallback { // callback function type (error-first)
+    (error: Error, titles: string[]): void;
 }
 
-const lib2 = new UniLibrarian();
-lib2.assistAuthority(); // it will change to the above function
+function getBookByCategory(cat: Category, callback: LibMgrCallback): void {
+    setTimeout(() => {
+        try{
+            const foundBookTitles: string[] = getBookTitlesByCategory();
+            if(foundBookTitles.length > 0){
+                callback(null, foundBookTitles);
+            } else {
+                throw new Error("no book has been found...");
+            }
+        } catch(e){
+            callback(e, null);
+        }
+    }, 2000);
+}
+
+function logCateSearch(error: Error, results: string[]): void{
+    if(error) {
+        console.log("Error: ", error.message);
+    } else {
+        results.forEach((item: string, idx) => {
+            console.log(`#${idx + 1}: ${item}`);
+        });
+    }
+}
+
+getBookByCategory(Category.Biography, logCateSearch);
