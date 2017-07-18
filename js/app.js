@@ -32,10 +32,10 @@ function getBookTitlesByCategory(category) {
     var allBooks = getAllBooks();
     return allBooks.filter(function (book) { return book.category === category; }).map(function (book) { return book.title; });
 }
-function getBookByCategory(cat, callback) {
+function getBookByCategoryCb(cat, callback) {
     setTimeout(function () {
         try {
-            var foundBookTitles = getBookTitlesByCategory();
+            var foundBookTitles = getBookTitlesByCategory(cat);
             if (foundBookTitles.length > 0) {
                 callback(null, foundBookTitles);
             }
@@ -58,5 +58,32 @@ function logCateSearch(error, results) {
         });
     }
 }
-getBookByCategory(enums_1.Category.Biography, logCateSearch);
+// getBookByCategoryCb(Category.Biography, logCateSearch);
+function getBookByCategoryPromise(cat) {
+    var p = new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            var foundBookTitles = getBookTitlesByCategory(cat);
+            if (foundBookTitles.length > 0) {
+                resolve(foundBookTitles);
+            }
+            else {
+                reject("No book was found...");
+            }
+        }, 2000);
+    });
+    return p;
+}
+getBookByCategoryPromise(enums_1.Category.Children)
+    .then(function (titles) {
+    titles.forEach(function (title) {
+        console.log(title);
+    });
+    return titles.length;
+}, function (error) {
+    return 0;
+}).then(function (numberOfBooks) {
+    console.log(numberOfBooks + " results found.");
+}).catch(function (error) {
+    console.log(error);
+});
 //# sourceMappingURL=app.js.map

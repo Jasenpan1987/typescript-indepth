@@ -391,10 +391,10 @@ interface LibMgrCallback { // callback function type (error-first)
     (error: Error, titles: string[]): void;
 }
 
-function getBookByCategory(cat: Category, callback: LibMgrCallback): void {
+function getBookByCategoryCb(cat: Category, callback: LibMgrCallback): void {
     setTimeout(() => {
         try{
-            const foundBookTitles: string[] = getBookTitlesByCategory();
+            const foundBookTitles: string[] = getBookTitlesByCategory(cat);
             if(foundBookTitles.length > 0){
                 callback(null, foundBookTitles);
             } else {
@@ -416,4 +416,32 @@ function logCateSearch(error: Error, results: string[]): void{
     }
 }
 
-getBookByCategory(Category.Biography, logCateSearch);
+// getBookByCategoryCb(Category.Biography, logCateSearch);
+
+function getBookByCategoryPromise(cat: Category): Promise<string[]> { // the return type of a promise is the type of value it returns once getting resolved
+    const p: Promise<string[]> = new Promise((resolve: Function, reject: Function) => {
+        setTimeout(() => {
+            const foundBookTitles: string[] = getBookTitlesByCategory(cat);
+            if(foundBookTitles.length > 0){
+                resolve(foundBookTitles);
+            } else {
+                reject("No book was found...");
+            }
+        }, 2000);
+    });
+    return p;
+}
+
+getBookByCategoryPromise(Category.Children)
+    .then((titles: string[]) => {
+        titles.forEach((title: string) => {
+            console.log(title);
+        });
+        return titles.length;
+    }, (error) => {// reject
+        return 0;
+    }).then((numberOfBooks: number) => {
+        console.log(numberOfBooks + " results found.");
+    }).catch((error: string) => {
+        console.log(error);
+    });
