@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var classes_1 = require("./classes");
 // const snakeCaseTitle = _.snakeCase("Something Good To Have");
 // // console.log(snakeCaseTitle);
 // function getAllBooks(): Book[] {
@@ -284,5 +285,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // }
 // console.log(myObj[mySymbol]);
 // const utsLibrarian = new UniLibrarian();
-// utsLibrarian[MY_SYMBOL](); // works 
+// utsLibrarian[MY_SYMBOL](); // works
+// decorator
+var lib1 = new classes_1.UniLibrarian();
+var plib = new classes_1.PublicLibrarian();
+var emp = new classes_1.Employee();
+var emp2 = new classes_1.Employee();
+// Employee.prototype.addToSchedule = function () { // this will give you an error since addToSchedule has the readOnly decorator
+//     console.log("Im too lazy...");
+// }
+emp2.addToSchedule();
+classes_1.UniLibrarian.prototype.assistAuthority = function () {
+    console.log("Im too lazy, dont want to assist anyone!");
+};
+var lib2 = new classes_1.UniLibrarian();
+lib2.assistAuthority(); // it will change to the above function
 //# sourceMappingURL=app.js.map

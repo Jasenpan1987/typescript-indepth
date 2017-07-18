@@ -1,14 +1,17 @@
 import { Book, DamageLogger, Author, Librarian } from './interfaces';
+import { sealed, sealedFactory, logger, readOnly, writableFactory } from './decorators';
 
 const MY_SYMBOL = Symbol();
 
+@logger
 class Employee {
     title: string;
 
+    @readOnly
     addToSchedule(): void {
         console.log("Employee added to schedual...");
     }
-
+    
     logTitle(): void {
         console.log(`Employee's title: ${this.title}`);
     }
@@ -24,6 +27,7 @@ class Researcher {
 // 1) need to IMPLEMENT all the classes you needed just like implements interfaces
 // 2) added function/property types of the interfaces that requires
 // 3) take a look at applyMixin function in the Utils.ts
+@sealed
 class UniLibrarian implements Librarian, Employee, Researcher {
     name: string;
     email: string;
@@ -33,6 +37,7 @@ class UniLibrarian implements Librarian, Employee, Researcher {
         console.log("Helping " + customerName);
     }
 
+    @writableFactory(true)
     assistAuthority () {
         console.log("assisting authority");
     }
@@ -48,6 +53,7 @@ class UniLibrarian implements Librarian, Employee, Researcher {
     doResearch: (topic: string) => void;
 }
 
+@sealedFactory("Jasen")
 class PublicLibrarian implements Librarian {
     name: string;
     email: string;

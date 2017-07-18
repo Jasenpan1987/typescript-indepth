@@ -5,6 +5,7 @@
         "module": "commonjs",
         "sourceMap": true,
         "outDir": "js",
-        "watch": true
+        "watch": true,
+        "experimentalDecorators": true
     }
 }

@@ -366,3 +366,21 @@ import * as _ from 'lodash';
 
 // const utsLibrarian = new UniLibrarian();
 // utsLibrarian[MY_SYMBOL](); // works
+
+// decorator
+const lib1 = new UniLibrarian();
+const plib = new PublicLibrarian();
+
+const emp = new Employee();
+const emp2 = new Employee();
+// Employee.prototype.addToSchedule = function () { // this will give you an error since addToSchedule has the readOnly decorator
+//     console.log("Im too lazy...");
+// }
+emp2.addToSchedule();
+
+UniLibrarian.prototype.assistAuthority = function () {
+    console.log("Im too lazy, dont want to assist anyone!");
+}
+
+const lib2 = new UniLibrarian();
+lib2.assistAuthority(); // it will change to the above function
